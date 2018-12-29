@@ -14,8 +14,17 @@
 
 <body>
 <div>
-    <h1>Deploy a Remix Contract</h1>
+    <h1>Ethereum Secret Messenger</h1>
+    <hr>
+
+    <label for="message">This site writes a secret message to the Ethereum
+        blockchain!</label>
+    <input id="userInput" type="text">
+
+    <button id="setMessageButton">Set secret message</button>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
 <script>
 
@@ -62,9 +71,15 @@
     ]);
 
     // Get the contract abi
-    var myMessage = RemixContract.at('0xc091c6ab096e2539e050d7669a1d9d21be231672');
+    var myMessage = RemixContract.at('0xcceb42dcb667bf16ade932f292ffc2103cd48eae');
 
     console.log(myMessage);
+
+    $("#setMessageButton").click(function () {
+        message = $("#userInput").val()
+        myMessage.setMessage(message, (error, result) => {message = result});
+        console.log($("#userInput").val())
+    });
 
 </script>
 </body>
